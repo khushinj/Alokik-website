@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Export — Alokik</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#141B2E; --navy-2:#1C2540; --white:#FFFFFF; --off:#F5F5F3;
+    --ink:#14161C; --ink-dim:#6B6D74; --line:#E7E6E2;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--white);color:var(--ink);font-family:'Inter',sans-serif;font-size:16px;line-height:1.55;overflow-x:hidden;}
+  img{display:block;max-width:100%;}
+  a{color:inherit;text-decoration:none;}
+  .display{font-family:'Fraunces',serif;font-weight:500;letter-spacing:-0.02em;}
+  .container{max-width:1320px;margin:0 auto;padding:0 56px;}
+  section{padding:56px 0;}
+
+  header{position:relative;display:flex;justify-content:space-between;align-items:center;padding:28px 56px;border-bottom:1px solid var(--line);}
+  .logo{font-family:'Fraunces',serif;font-weight:600;font-size:22px;flex-shrink:0;}
+  nav.menu-links{display:flex;gap:28px;font-size:12px;font-weight:500;letter-spacing:0.03em;color:var(--ink-dim);}
+  nav.menu-links a:hover{color:var(--ink);}
+  .cart{width:38px;height:38px;border-radius:50%;background:var(--off);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .cart svg{width:16px;height:16px;stroke:var(--ink);}
+  .header-right{display:flex;align-items:center;gap:16px;}
+  .hamburger{display:none;width:38px;height:38px;border-radius:50%;background:var(--off);align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;border:none;}
+  .hamburger svg{width:18px;height:18px;stroke:var(--ink);}
+  .mobile-nav{display:none;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:var(--white);border-bottom:1px solid var(--line);padding:8px 20px 20px;z-index:50;}
+  .mobile-nav.open{display:flex;}
+  .mobile-nav a{padding:12px 0;font-size:14px;border-bottom:1px solid var(--line);}
+  .mobile-nav a:last-child{border-bottom:none;}
+
+  .page-hero{padding:48px 0 40px;}
+  .eyebrow{font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-dim);margin-bottom:10px;display:block;}
+  .eyebrow.on-navy{color:rgba(255,255,255,0.55);}
+  .page-title{font-size:clamp(30px,4.4vw,54px);margin-bottom:14px;line-height:1.05;}
+  .page-desc{font-size:15px;color:var(--ink-dim);max-width:520px;}
+
+  .pill{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:100px;font-size:12px;font-weight:500;border:1px solid transparent;cursor:pointer;white-space:nowrap;}
+  .pill-outline{border-color:var(--ink);color:var(--ink);}
+  .pill-outline.on-navy{border-color:var(--white);color:var(--white);}
+  .pill-filled{background:var(--navy);color:var(--white);}
+  .pill-filled.on-navy{background:var(--white);color:var(--navy);}
+  .pills-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:28px;-webkit-overflow-scrolling:touch;}
+
+  .band-navy{background:var(--navy);color:var(--white);}
+  .sec-head{display:flex;justify-content:space-between;align-items:flex-start;gap:24px;margin-bottom:28px;flex-wrap:wrap;}
+  .sec-title{font-size:clamp(20px,3vw,26px);margin-top:4px;}
+  .sec-desc{font-size:13px;color:var(--ink-dim);max-width:340px;}
+  .band-navy .sec-desc{color:rgba(255,255,255,0.7);}
+
+  .ph{background:var(--off);display:flex;align-items:center;justify-content:center;text-align:center;color:var(--ink-dim);font-size:11px;padding:16px;border-radius:4px;line-height:1.4;width:100%;height:100%;}
+  .ph.on-navy{background:var(--navy-2);color:rgba(255,255,255,0.5);}
+
+  .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+  .grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+  .grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;}
+  .split-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:48px;align-items:start;}
+
+  .card .ph{height:280px;margin-bottom:12px;}
+  .card .name{font-size:16px;font-weight:500;font-family:'Fraunces',serif;}
+  .card .cat{font-size:12px;color:var(--ink-dim);}
+  .card-link{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--ink-dim);margin-top:6px;}
+
+  .stat{text-align:left;}
+  .stat .num{font-family:'Fraunces',serif;font-size:clamp(28px,4vw,40px);}
+  .stat .label{font-size:12px;color:var(--ink-dim);margin-top:4px;}
+  .stat.on-navy .num{color:var(--white);}
+  .stat.on-navy .label{color:rgba(255,255,255,0.6);}
+
+  .form-row{display:flex;flex-direction:column;gap:6px;margin-bottom:20px;}
+  .form-row label{font-size:11px;text-transform:uppercase;letter-spacing:0.06em;color:var(--ink-dim);}
+  .form-row input, .form-row textarea{border:1px solid var(--line);padding:14px;font-family:'Inter',sans-serif;font-size:16px;border-radius:2px;background:var(--white);width:100%;}
+  .form-row textarea{min-height:110px;resize:vertical;}
+  .submit-btn{background:var(--navy);color:var(--white);border:none;padding:14px 28px;border-radius:100px;font-size:12px;font-weight:600;letter-spacing:0.04em;cursor:pointer;width:100%;}
+  @media(min-width:600px){ .submit-btn{width:auto;} }
+
+  .contact-line{display:flex;gap:12px;align-items:flex-start;margin-bottom:20px;}
+  .contact-line svg{width:18px;height:18px;stroke:var(--navy);flex-shrink:0;margin-top:2px;}
+  .contact-line .label{font-size:11px;color:var(--ink-dim);text-transform:uppercase;letter-spacing:0.05em;}
+  .contact-line .value{font-size:15px;}
+
+  footer{border-top:1px solid var(--line);padding:40px 56px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;}
+  footer .logo{font-size:18px;}
+  footer p{font-size:12px;color:var(--ink-dim);text-align:right;}
+
+  /* ===== RESPONSIVE ===== */
+  @media(max-width:1024px){
+    .container{padding:0 32px;}
+    header{padding:22px 32px;}
+    .grid-4{grid-template-columns:repeat(2,1fr);}
+    .split-grid{grid-template-columns:1fr;gap:32px;}
+  }
+  @media(max-width:900px){
+    nav.menu-links{display:none;}
+    .hamburger{display:flex;}
+    .grid-3{grid-template-columns:repeat(2,1fr);}
+    section{padding:40px 0;}
+  }
+  @media(max-width:640px){
+    .container{padding:0 20px;}
+    header{padding:18px 20px;}
+    section{padding:32px 0;}
+    .grid-3,.grid-4,.grid-2{grid-template-columns:1fr;}
+    .sec-head{flex-direction:column;}
+    .pills-row{flex-wrap:nowrap;overflow-x:auto;padding-bottom:6px;margin-left:-20px;margin-right:-20px;padding-left:20px;padding-right:20px;}
+    .pills-row::-webkit-scrollbar{display:none;}
+    footer{flex-direction:column;align-items:flex-start;text-align:left;}
+    footer p{text-align:left;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <a href="alokik-homepage.html" class="logo">a.</a>
+  <nav class="menu-links">
+    <a href="alokik-homepage.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="collections.html">Collections</a>
+    <a href="projects.html">Projects</a>
+    <a href="export.html">Export</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+  <div class="header-right">
+    <div class="cart"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M6 6h15l-1.5 9h-12z"/><circle cx="9" cy="20" r="1"/><circle cx="18" cy="20" r="1"/></svg></div>
+    <button class="hamburger" id="hamburger"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  </div>
+  <div class="mobile-nav" id="mobileNav">
+    <a href="alokik-homepage.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="collections.html">Collections</a>
+    <a href="projects.html">Projects</a>
+    <a href="export.html">Export</a>
+    <a href="contact.html">Contact</a>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="container">
+    <span class="eyebrow">export</span>
+    <h1 class="page-title display">Manufactured in Jaipur, shipped worldwide.</h1>
+    <p class="page-desc">Alokik works directly with international buyers, hotel groups, and retailers — from single-container orders to full OEM production runs.</p>
+  </div>
+</section>
+
+<section style="padding-top:0;">
+  <div class="container">
+    <div class="grid-3">
+      <div class="card">
+        <div class="ph" style="height:140px;">OEM & ODM Manufacturing</div>
+        <div class="name" style="margin-top:12px;">OEM &amp; ODM Manufacturing</div>
+        <div class="cat">We produce to your specifications, private label or original design.</div>
+      </div>
+      <div class="card">
+        <div class="ph" style="height:140px;">Bulk Orders</div>
+        <div class="name" style="margin-top:12px;">Bulk Orders</div>
+        <div class="cat">Production capacity for large hospitality and retail orders.</div>
+      </div>
+      <div class="card">
+        <div class="ph" style="height:140px;">Container Shipping</div>
+        <div class="name" style="margin-top:12px;">Container Shipping</div>
+        <div class="cat">Full and part-container loads, packed for long transit.</div>
+      </div>
+      <div class="card">
+        <div class="ph" style="height:140px;">Countries Served</div>
+        <div class="name" style="margin-top:12px;">Countries Served</div>
+        <div class="cat">Shipping to 30+ countries across Europe, the US, and the Middle East.</div>
+      </div>
+      <div class="card">
+        <div class="ph" style="height:140px;">Export-Grade Packaging</div>
+        <div class="name" style="margin-top:12px;">Export-Grade Packaging</div>
+        <div class="cat">Moisture-proof, crash-tested crating for every shipment.</div>
+      </div>
+      <div class="card">
+        <div class="ph" style="height:140px;">Quality Checks</div>
+        <div class="name" style="margin-top:12px;">Quality Checks</div>
+        <div class="cat">Every order inspected before it leaves the workshop.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band-navy">
+  <div class="container">
+    <div class="sec-head">
+      <div>
+        <span class="eyebrow on-navy">where we ship</span>
+        <div class="sec-title display">30+ countries served.</div>
+      </div>
+    </div>
+    <div class="ph on-navy" style="height:280px;">WORLD MAP — shipping destinations</div>
+  </div>
+</section>
+
+<section style="text-align:center;">
+  <div class="container">
+    <h2 class="display" style="font-size:clamp(24px,4vw,32px);margin-bottom:20px;">Ready to place a bulk order?</h2>
+    <a href="contact.html" class="pill pill-filled">Request Export Quote <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></a>
+  </div>
+</section>
+
+<footer>
+  <div class="logo display">alokik.</div>
+  <p>© 2026 alokik india — jaipur, rajasthan. handcrafted since 1998.</p>
+</footer>
+
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const mobileNav = document.getElementById('mobileNav');
+  if (hamburger && mobileNav) {
+    hamburger.addEventListener('click', () => mobileNav.classList.toggle('open'));
+  }
+</script>
+
+</body>
+</html>

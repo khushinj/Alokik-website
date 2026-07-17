@@ -1,0 +1,158 @@
+.materials {
+  padding: 80px 0;
+  background: var(--white);
+}
+
+/* ---------- Section Header ---------- */
+
+.materials .section-header {
+  margin-bottom: 50px;
+}
+
+.materials .section-header span {
+  display: inline-block;
+  margin-bottom: 12px;
+
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+
+  color: var(--ink-dim);
+}
+
+.materials .section-header h2 {
+  font-family: "Fraunces", serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 500;
+  line-height: 1.15;
+  color: var(--ink);
+}
+
+/* ---------- Card ---------- */
+
+.material-card {
+  cursor: pointer;
+}
+
+.material-card img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+
+  object-fit: cover;
+
+  border-radius: 6px;
+
+  transition: transform .4s ease;
+}
+
+.material-card:hover img {
+  transform: scale(1.04);
+}
+
+.material-card h3 {
+  margin-top: 16px;
+
+  font-size: 15px;
+  font-weight: 500;
+
+  color: var(--ink);
+
+  text-align: center;
+}
+
+/* ---------- Swiper ---------- */
+
+.materials .swiper {
+  overflow: visible;
+  padding-bottom: 10px;
+}
+
+.materials .swiper-slide {
+  height: auto;
+}
+
+/* ---------- Navigation ---------- */
+
+.materials .swiper-button-prev,
+.materials .swiper-button-next {
+  width: 42px;
+  height: 42px;
+
+  border-radius: 50%;
+
+  background: var(--white);
+
+  border: 1px solid var(--line);
+
+  color: var(--navy);
+
+  transition: .3s ease;
+}
+
+.materials .swiper-button-prev:hover,
+.materials .swiper-button-next:hover {
+  background: var(--navy);
+  color: var(--white);
+}
+
+.materials .swiper-button-prev::after,
+.materials .swiper-button-next::after {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+/* ---------- Tablet ---------- */
+
+@media (max-width: 992px) {
+
+  .materials {
+    padding: 70px 0;
+  }
+
+  .materials .section-header {
+    margin-bottom: 40px;
+  }
+
+}
+
+/* ---------- Mobile ---------- */
+
+@media (max-width: 768px) {
+
+  .materials {
+    padding: 60px 0;
+  }
+
+  .materials .section-header h2 {
+    font-size: 2rem;
+  }
+
+  .material-card h3 {
+    font-size: 14px;
+  }
+
+  .materials .swiper-button-prev,
+  .materials .swiper-button-next {
+    display: none;
+  }
+
+}
+
+/* ---------- Small Mobile ---------- */
+
+@media (max-width: 480px) {
+
+  .materials {
+    padding: 50px 0;
+  }
+
+  .materials .section-header span {
+    font-size: 11px;
+  }
+
+  .materials .section-header h2 {
+    font-size: 1.7rem;
+  }
+
+}
